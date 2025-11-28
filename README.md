@@ -3,8 +3,8 @@
 
 
 # Book Store
-**Liam Matheson**
-** Colton Trainor**
+**Liam Matheson, Colton Trainor**
+
 
 ---
 
