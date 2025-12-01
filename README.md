@@ -43,7 +43,10 @@
 ---
 
 ## Installation
+# OPTION 1
 
+- x
+- x
 
 ## References
 
@@ -51,8 +54,5 @@
 - x 
 - x
 
-# OPTION 1
 
-- x
-- x
 
