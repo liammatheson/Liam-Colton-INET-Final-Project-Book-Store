@@ -11,3 +11,14 @@ public class LiamColtonBookstoreApplication {
 	}
 
 }
+
+/*
+
+• Register for an account
+• Log in and access their profile
+• View available products or books
+• Add items to a basket
+• Review items in the basket
+• Complete a checkout process
+
+*/
