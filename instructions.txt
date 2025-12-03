@@ -1,0 +1,124 @@
+Due Date: Week 15 (Dec 8 to Dec 12)
+Team Based Project (Maximum 4 students per team)
+1. Project Overview
+
+During the final two weeks of the course, your team will design and build a complete full stack web application that brings together all the concepts you learned from Week 1 to Week 14. You will choose one of the following themes:
+
+Option A: Online Store
+Option B: Book Store
+
+Your application must allow users to complete the following actions:
+
+• Register for an account
+• Log in and access their profile
+• View available products or books
+• Add items to a basket
+• Review items in the basket
+• Complete a checkout process
+
+Your project must follow the skills and modules learned throughout the term, including HTML, CSS, JavaScript, Spring Boot, MVC architecture, handling forms, sessions, cookies, JDBC, JPA ORM, security basics, password hashing, prepared statements, and unit testing.
+
+This project evaluates your ability to apply your knowledge to a real world application in a collaborative environment.
+2. Team Structure
+
+• Teams must have two to four members
+• Each member must have a clear and documented role
+• Examples of typical roles include:
+• Backend Developer
+• Frontend Developer
+• Database and Data Model Designer
+• Tester and Documentation Lead
+• Deployment and GitHub Manager
+
+Each student must be able to explain and defend their own work during the presentation. Marks will reflect individual understanding as well as group performance.
+3. Technical Requirements
+
+Your application must include the following features.
+3.1 User Registration and Login
+
+• Register new users
+• Validate email and password
+• Store passwords using hashing
+• Log in with sessions or cookies
+• Redirect to a homepage or dashboard after login
+3.2 Product or Book Catalog
+
+• Display a list of available items
+• Store data in a database (H2 or MySQL)
+• Use JPA or JDBC to retrieve items
+• Include product details such as name, price, description, and image link
+3.3 Basket Functionality
+
+• Add items to the basket
+• Remove items from the basket
+• View basket contents at any time
+• Store basket data using sessions or cookies
+3.4 Checkout
+
+• Show total price
+• Confirm purchase
+• Save order in the database
+3.5 MVC Structure
+
+You must use the Model View Controller pattern learned during Week 4.
+3.6 Persistent Data
+
+Use either:
+
+• JDBC with SQL Prepared Statements
+• JPA ORM with Entities and Repositories
+3.7 Security Requirements
+
+Use concepts from Module 14:
+
+• Authentication
+• Authorization for protected pages
+• Password hashing
+• SQL injection prevention
+3.8 Testing
+
+Include at least:
+
+• One service test
+• One controller test using MockMVC
+3.9 Code Organization
+
+Follow proper folder structure:
+
+• controller
+• model
+• repository
+• service
+• configuration
+• templates (Thymeleaf)
+• static (CSS, JS)
+4. Deliverables
+4.1 GitHub Repository
+
+• Create one team repository on GitHub
+• Make the repository private
+• Add me as a collaborator
+• Use branches and pull requests for teamwork
+• Include a detailed README that explains your project, your features, installation steps, and team roles
+4.2 Final Presentation
+
+Each team will present for 10 to 12 minutes. Your presentation must include:
+
+• Walkthrough of your application
+• Explanation of MVC workflow
+• Database design
+• Demonstration of registration, login, product list, basket, and checkout
+• Discussion of testing
+• Explanation of each team member’s contribution
+• Q and A with the instructor
+
+Each student must answer questions about their code.
+4.3 Documentation
+
+Your project must include:
+
+• README.md
+• ER diagram
+• Brief architecture diagram
+• List of features
+• Clear explanation of roles
