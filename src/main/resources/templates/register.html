@@ -18,7 +18,28 @@
 
     <main>
         <h1>Page Title Here</h1>
-        <!-- page-specific content -->
+            <h1>Register</h1>
+
+    <form th:action="@{/register}" th:object="${user}" method="post" autocomplete="off">
+        <div>
+            <label for="name">Name:</label>
+            <input type="text" id="name" th:field="*{name}" autocomplete="off" required>
+        </div>
+
+        <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" th:field="*{email}" autocomplete="off" required>
+        </div>
+
+        <div>
+            <label for="password">Password:</label>
+            <input type="password" id="password" th:field="*{password}" minlength="8" pattern="^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).+$" title="Password must be at least 8 characters and include upper, lower, and a number" required>
+        </div>
+
+        <button type="submit">Register</button>
+    </form>
+
+    <p>Already have an account? <a th:href="@{/login}">Login here</a>.</p>
     </main>
 
     <footer>
