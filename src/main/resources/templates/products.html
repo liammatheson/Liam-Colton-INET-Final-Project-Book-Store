@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <title>Bookstore</title>
-    <link rel="stylesheet" th:href="@{/css/style.css}">
+    <link rel="stylesheet" th:href="@{/style.css}">
 </head>
 <body>
     <header>
@@ -23,7 +23,7 @@
             <img th:src="${p.imageUrl}" alt="Cover" />
             <h3 th:text="${p.name}">Book Name</h3>
             <p th:text="${p.author}">Author</p>
-            <p th:text="${p.price}">Price</p>
+            <p th:text="'$' + ${p.price}">Price</p>
             </a>
         </div>
         </div>
