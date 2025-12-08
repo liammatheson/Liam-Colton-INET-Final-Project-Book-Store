@@ -1,18 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Bookstore</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <header>
         <nav>
-            <a th:href="@{/}">Home</a> |
             <a th:href="@{/products}">Products</a> |
-            <a th:href="@{/basket}">Basket</a> |
-            <a th:href="@{/register}">Register</a> |
-            <a th:href="@{/login}">Login</a>
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/profile}">Profile</a> |
+            </span>
+            <span sec:authorize="!isAuthenticated()">
+                <a th:href="@{/register}">Register</a> |
+                <a th:href="@{/login}">Login</a>
+            </span>
+
+            <span sec:authorize="isAuthenticated()">
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Logout</a>
+                <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;"></form>
+            </span>
+
         </nav>
     </header>
 
@@ -21,13 +31,13 @@
 
     <form th:action="@{/login}" method="post">
 
-        <div th:if="${error != null}" style="color:red;">
-            <p th:text="${error}"></p>
+        <div th:if="${param.error}" style="color:red;">
+            <p>Invalid email or password</p>
         </div>
 
         <div>
             <label for="email">Email:</label>
-            <input type="email" id="email" name="email" required>
+            <input type="email" id="email" name="username" required>
         </div>
 
         <div>
@@ -37,6 +47,7 @@
 
         <button type="submit">Login</button>
     </form>
+
 
     <p>Don't have an account? <a th:href="@{/register}">Register here</a>.</p>
     

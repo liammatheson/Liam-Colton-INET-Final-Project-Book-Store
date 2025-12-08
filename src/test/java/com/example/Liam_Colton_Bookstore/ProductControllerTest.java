@@ -16,7 +16,7 @@ import com.example.Liam_Colton_Bookstore.controller.ProductController;
 import com.example.Liam_Colton_Bookstore.model.Product;
 import com.example.Liam_Colton_Bookstore.service.ProductService;
 
-@WebMvcTest(ProductController.class) // .\mvnw.cmd test
+@WebMvcTest(ProductController.class)
 public class ProductControllerTest {
 
     @Autowired
@@ -27,9 +27,10 @@ public class ProductControllerTest {
 
     @Test
     public void testProductsPage() throws Exception {
-        mockMvc.perform(get("/products").with(user("testuser")))
-               .andExpect(status().isOk())
-               .andExpect(view().name("products"));
+        mockMvc.perform(get("/products")
+            .with(user("testuser").password("password").roles("USER")))
+            .andExpect(status().isOk())
+            .andExpect(view().name("products"));
     }
 
     @Test
@@ -40,9 +41,10 @@ public class ProductControllerTest {
 
         when(productService.getProductById(1L)).thenReturn(product);
 
-        mockMvc.perform(get("/product/1").with(user("testuser")))
-               .andExpect(status().isOk())
-               .andExpect(view().name("product-detail"))
-               .andExpect(model().attributeExists("product"));
+        mockMvc.perform(get("/product/1")
+            .with(user("testuser").password("password").roles("USER")))
+            .andExpect(status().isOk())
+            .andExpect(view().name("product-detail"))
+            .andExpect(model().attributeExists("product"));
     }
 }

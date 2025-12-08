@@ -1,59 +1,62 @@
-// i have this here to disable the spring security thing so i dont have to enter the user and password when i relaunch the spring server
-
 package com.example.Liam_Colton_Bookstore.config;
-import com.example.Liam_Colton_Bookstore.repository.UserRepo;
-
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.BadCredentialsException;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
 
+import com.example.Liam_Colton_Bookstore.service.CustomUserDetailsService;
+
 @Configuration
 public class SecurityConfig {
+
+    private final CustomUserDetailsService userDetailsService;
+
+    public SecurityConfig(CustomUserDetailsService userDetailsService) {
+        this.userDetailsService = userDetailsService;
+    }
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
             .csrf(csrf -> csrf.disable())
             .headers(headers -> headers.frameOptions(frame -> frame.disable()))
-            .authorizeHttpRequests(auth -> auth.anyRequest().permitAll()); // allow everything
+            .authorizeHttpRequests(auth -> auth
+                .requestMatchers(
+                    "/register", 
+                    "/h2-console/**", 
+                    "/css/**",
+                    "/js/**",
+                    "/images/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+            )
+            .formLogin(form -> form
+                .loginPage("/login")
+                .defaultSuccessUrl("/products", true)
+                .permitAll()
+            )
+            .logout(logout -> logout.permitAll());
+
         return http.build();
     }
 
-    @Bean // this hashes a newly made password. this happens during registration.
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
 
-    @Bean // this is for comparing the user login with the hashed password. is there a better way to do this??? 
-    public DaoAuthenticationProvider authenticationProvider(UserRepo userRepository, PasswordEncoder passwordEncoder) {
-        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider() {
-            @Override
-            public void additionalAuthenticationChecks(UserDetails userDetails, UsernamePasswordAuthenticationToken authentication) {
-                if (!passwordEncoder.matches(authentication.getCredentials().toString(), userDetails.getPassword())) {
-                    throw new BadCredentialsException("Bad credentials");
-                }
-            }
-        };
-        authProvider.setUserDetailsService(email -> userRepository.findByEmail(email) 
-                .map(u -> org.springframework.security.core.userdetails.User
-                        .withUsername(u.getEmail())
-                        .password(u.getPassword())
-                        .roles("USER")
-                        .build())
-                .orElseThrow(() -> new UsernameNotFoundException("User not found")));
-        authProvider.setPasswordEncoder(passwordEncoder);
+
+
+    @Bean
+    public DaoAuthenticationProvider authenticationProvider() {
+        DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+        authProvider.setUserDetailsService(userDetailsService);
+        authProvider.setPasswordEncoder(passwordEncoder());
         return authProvider;
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
 }
-
-

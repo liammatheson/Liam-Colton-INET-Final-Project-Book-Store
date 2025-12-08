@@ -1,24 +1,36 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
     <title>Bookstore</title>
-    <link rel="stylesheet" th:href="@{/style.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
     <header>
         <nav>
-            <a th:href="@{/}">Home</a> |
             <a th:href="@{/products}">Products</a> |
-            <a th:href="@{/basket}">Basket</a> |
-            <a th:href="@{/register}">Register</a> |
-            <a th:href="@{/login}">Login</a>
+            <span sec:authorize="isAuthenticated()">
+                <a th:href="@{/profile}">Profile</a> |
+            </span>
+            <span sec:authorize="!isAuthenticated()">
+                <a th:href="@{/register}">Register</a> |
+                <a th:href="@{/login}">Login</a>
+            </span>
+
+            <span sec:authorize="isAuthenticated()">
+                <a href="#" onclick="event.preventDefault(); document.getElementById('logoutForm').submit();">Logout</a>
+                <form id="logoutForm" th:action="@{/logout}" method="post" style="display:none;"></form>
+            </span>
         </nav>
     </header>
 
     <main>
-        <h1>Page Title Here</h1>
-        <!-- page-specific content -->
+        <div class="profile-card">
+            <h2>Your Profile</h2>
+            <p><strong>Name: </strong><span th:text="${user.name}">User Name</span></p>
+            <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
+        </div>
     </main>
 
     <footer>
