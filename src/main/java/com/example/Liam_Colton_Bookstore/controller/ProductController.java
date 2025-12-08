@@ -1,33 +1,30 @@
 // for products
 package com.example.Liam_Colton_Bookstore.controller;
 
-import com.example.Liam_Colton_Bookstore.model.Product;
-import com.example.Liam_Colton_Bookstore.repository.ProductRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
-import java.util.List;
+import com.example.Liam_Colton_Bookstore.service.ProductService;
 
 @Controller
 public class ProductController {
 
     @Autowired
-    private ProductRepo productRepo;
+    private ProductService productService;
 
     @GetMapping("/products")
-    public String showProducts(Model model) {
-        List<Product> products = productRepo.findAll();
-        model.addAttribute("products", products);
+    public String products(Model model) {
+        model.addAttribute("products", productService.getAllProducts());
         return "products";
     }
 
-    @GetMapping("/products/{id}")
-    public String showProductDetails(@PathVariable Long id, Model model) {
-        Product product = productRepo.findById(id).orElse(null);
-        model.addAttribute("product", product);
-        return "product-details";
+    @GetMapping("/product/{id}")
+    public String productDetail(@PathVariable Long id, Model model) {
+        model.addAttribute("product", productService.getProductById(id));
+        return "product-detail";
     }
 }
+

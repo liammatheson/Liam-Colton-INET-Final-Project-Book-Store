@@ -22,3 +22,10 @@ public class LiamColtonBookstoreApplication {
 • Complete a checkout process
 
 */
+
+/*
+
+tasklist /FI "IMAGENAME eq java.exe"
+taskkill /PID <pid> /F
+
+*/

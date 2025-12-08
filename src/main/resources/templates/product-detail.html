@@ -17,16 +17,15 @@
     </header>
 
     <main>
-        <div class="product-grid">
-        <div th:each="p : ${products}" class="product-card">
-            <a th:href="@{/product/{id}(id=${p.id})}">
-            <img th:src="${p.imageUrl}" alt="Cover" />
-            <h3 th:text="${p.name}">Book Name</h3>
-            <p th:text="${p.author}">Author</p>
-            <p th:text="${p.price}">Price</p>
-            </a>
-        </div>
-        </div>
+        <h2 th:text="${product.name}"></h2>
+        <p th:text="${product.author}"></p>
+        <img th:src="${product.imageUrl}" alt="Cover" />
+        <p th:text="${product.description}"></p>
+        <p th:text="${product.price}"></p>
+        <form action="/basket/add" method="post">
+            <input type="hidden" th:name="productId" th:value="${product.id}" />
+            <button type="submit">Add to Cart</button>
+        </form>
     </main>
 
     <footer>

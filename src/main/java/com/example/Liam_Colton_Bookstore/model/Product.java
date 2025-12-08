@@ -1,6 +1,11 @@
 package com.example.Liam_Colton_Bookstore.model;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+import jakarta.persistence.Id;
+import jakarta.persistence.Lob;
+import jakarta.persistence.Table;
 
 @Entity
 @Table(name = "products")
@@ -11,14 +16,25 @@ public class Product {
     private Long id;
 
     private String name;
+    private String author;
+    @Lob // i had to add this or the max characters was 255. it makes the limit bigger.
     private String description;
     private double price;
     private String imageUrl;
 
     public Product() {}
 
-    public Product(String name, String description, double price, String imageUrl) {
+    /*
+
+INSERT INTO products (name, author, description, price, image_url)
+VALUES ('Book A', 'Author', 'Test description', 19.99, 'https://example.com/a.jpg');
+
+    
+    */
+
+    public Product(String name, String author, String description, double price, String imageUrl) {
         this.name = name;
+        this.author = author;
         this.description = description;
         this.price = price;
         this.imageUrl = imageUrl;
@@ -38,4 +54,9 @@ public class Product {
 
     public String getImageUrl() { return imageUrl; }
     public void setImageUrl(String imageUrl) { this.imageUrl = imageUrl; }
+
+    public String getAuthor() {
+        return author;
+    }
+
 }

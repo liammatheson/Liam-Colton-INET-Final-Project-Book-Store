@@ -28,12 +28,12 @@ public class SecurityConfig {
         return http.build();
     }
 
-    @Bean // this is the password hashing part
+    @Bean // this hashes a newly made password. this happens during registration.
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 
-    @Bean
+    @Bean // this is for comparing the user login with the hashed password. is there a better way to do this??? 
     public DaoAuthenticationProvider authenticationProvider(UserRepo userRepository, PasswordEncoder passwordEncoder) {
         DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider() {
             @Override
@@ -43,11 +43,11 @@ public class SecurityConfig {
                 }
             }
         };
-        authProvider.setUserDetailsService(email -> userRepository.findByEmail(email)
+        authProvider.setUserDetailsService(email -> userRepository.findByEmail(email) 
                 .map(u -> org.springframework.security.core.userdetails.User
                         .withUsername(u.getEmail())
                         .password(u.getPassword())
-                        .roles("USER") // or whatever roles you want
+                        .roles("USER")
                         .build())
                 .orElseThrow(() -> new UsernameNotFoundException("User not found")));
         authProvider.setPasswordEncoder(passwordEncoder);
