@@ -58,14 +58,14 @@
 
 ## Installation Steps
 
-Clone the repository and navigate into it:
+- Clone the repository and navigate into it:
 
-git clone https://github.com/liammatheson/Liam-Colton-INET-Final-Project-Book-Store.git
-cd Liam-Colton-INET-Final-Project-Book-Store
+- git clone https://github.com/liammatheson/Liam-Colton-INET-Final-Project-Book-Store.git
+- cd Liam-Colton-INET-Final-Project-Book-Store
 
-Make sure you have Java JDK 17 or higher and Maven installed. Build the project with mvn clean install. Once the build completes, start the application using mvnw spring-boot:run. The application will then be accessible at http://localhost:8080.
+- Make sure you have Java JDK 17 or higher and Maven installed. Build the project with mvn clean install. Once the build completes, start the application using mvnw spring-boot:run. The application will then be accessible at http://localhost:8080.
 
-You can also open the project in your preferred IDE (VS Code, Eclipse, IntelliJ) as a Maven project for easier editing and running.
+- You can also open the project in your preferred IDE (VS Code, Eclipse, IntelliJ) as a Maven project for easier editing and running.
 
 
 ## References
