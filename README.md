@@ -16,12 +16,12 @@
 
 ## Features
 
-• Register for an account
-• Log in and access your profile
-• View available products or books
-• Add items to a basket
-• Review items in the basket
-• Complete a checkout process
+- Register for an account
+- Log in and access your profile
+- View available products or books
+- Add items to a basket
+- Review items in the basket
+- Complete a checkout process
 
 ---
 
