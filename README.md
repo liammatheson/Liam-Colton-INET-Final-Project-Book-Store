@@ -64,6 +64,8 @@
 
 ## References
 
+All book information, including descriptions and images, is sourced from [Project Gutenberg](https://www.gutenberg.org/).
+
 This project was developed using official Spring documentation, in-class materials from NSCC, and general Java/Spring Boot resources for guidance. No external code was copied; references were used only for learning and clarification of concepts.
 
 
