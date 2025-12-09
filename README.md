@@ -37,9 +37,8 @@
 
 ## Team Roles
 
-Liam - 
-Colton -
-
+- Liam - 3.1, 3.2. Github, CSS.
+- Colton - 3.3, 3.4, Diagrams
 
 ---
 
