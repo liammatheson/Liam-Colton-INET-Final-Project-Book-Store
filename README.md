@@ -51,8 +51,8 @@
 
 ## Team Roles
 
-- Liam - 3.1, 3.2. Github, CSS.
-- Colton - 3.3, 3.4, Diagrams
+- Liam - 3.1 User Registration and Login, 3.2 Book Catalog. Github, CSS.
+- Colton - 3.3 Basket Functionality, 3.4 Checkout, Diagrams
 
 ---
 
