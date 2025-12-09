@@ -10,7 +10,7 @@ header {
 }
 
 body {
-    background-color: #f5f5f5;
+    background-color: #e0e0e0;
     max-width: 90%;
     box-sizing: border-box;
     margin: 0 auto;
@@ -37,7 +37,8 @@ body {
     width: 40%;
     height: auto;
     max-height: 350px;
-    object-fit: contain; 
+    object-fit: contain;
+    padding-top: 3%; 
 }
 
 .product-card a {
@@ -48,3 +49,113 @@ body {
 /* .product-card {
     display: flex;   
 } */
+
+
+
+.product-container {
+  display: flex;
+  gap: 40px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.product-left {
+  flex: 2;
+}
+
+.product-right {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.product-image {
+    width: 40%;
+    height: auto;
+    max-height: 350px;
+    object-fit: contain; 
+}
+
+.price {
+  font-size: 2rem;
+  font-weight: bold;
+  padding-bottom: 5%;
+}
+
+.price .cents {
+  font-size: 1rem;
+  vertical-align: super;
+}
+
+.author {
+  font-style: italic;
+  color: #555;
+  margin-bottom: 10px;
+}
+
+
+.add-to-cart {
+  background-color: yellow;
+  border: none;
+  padding: 15px;
+  font-size: 1.2rem;
+  cursor: pointer;
+  border-radius: 8px;
+}
+
+.login-container {
+  gap: 40px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+
+.cart-panel {
+    display: none;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 300px;
+    background: #fff;
+    border: 1px solid #ccc;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    z-index: 100;
+}
+
+.cart-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 10px 0;
+}
+
+.cart-panel button {
+    width: 100%;
+    padding: 10px;
+    background-color: yellow;
+    border: none;
+    font-weight: bold;
+    cursor: pointer;
+    border-radius: 6px;
+}
+
+.cart-btn {
+    background-color: yellow;
+    border: 1px solid #ccc;
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.cart-btn:hover {
+    background-color: gold;
+}
