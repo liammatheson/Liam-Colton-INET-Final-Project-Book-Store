@@ -22,6 +22,7 @@
 - Add items to a basket
 - Review items in the basket
 - Complete a checkout process
+- JPA ORM with Entities and Repositories
 
 ---
 
