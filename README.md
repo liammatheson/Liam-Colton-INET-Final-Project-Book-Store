@@ -35,6 +35,15 @@
 
 ---
 
+## Diagrams
+
+# Entity Relationship Diagram
+
+
+![erd](/erd.png)
+
+---
+
 ## Team Roles
 
 - Liam - 3.1, 3.2. Github, CSS.
