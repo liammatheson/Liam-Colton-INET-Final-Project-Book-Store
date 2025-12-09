@@ -35,6 +35,14 @@
 
 ---
 
+## Team Roles
+
+Liam - 
+Colton -
+
+
+---
+
 ## Installation
 # OPTION 1
 
