@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title>Bookstore</title>
+    <title>Your Basket</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -25,7 +25,7 @@
 
             <span id="cart-container" style="position: relative; display: inline-block; margin-left:80vw;">
                 <button id="cart-toggle" class="cart-btn">
-                    Cart (<span id="cart-count" th:text="${cartItems != null ? cartItems.size() : 0}">0</span>)
+                    Basket (<span id="cart-count" th:text="${cartItems != null ? cartItems.size() : 0}">0</span>)
                 </button>
                 <div id="cart-panel" class="cart-panel" style="display:none; position:absolute; top:100%; right:0; width:300px; background:#fff; border:1px solid #ccc; padding:15px; border-radius:8px; box-shadow:0 4px 8px rgba(0,0,0,0.2); z-index:100;">
                     <ul id="cart-items">
@@ -64,8 +64,59 @@
     </script>
 
     <main>
-        <h1>Page Title Here</h1>
+        <h1>Your Basket</h1>
         <!-- page-specific content -->
+         <main style="max-width: 70%; margin: 0 auto; padding: 2%; background-color: #f5f5f5;">
+    <h1>Your Basket</h1>
+
+    <!-- If basket is empty -->
+    <div th:if="${#lists.isEmpty(basket)}">
+        <p>Your basket is empty.</p>
+    </div>
+
+    <!-- If basket has items -->
+    <div th:unless="${#lists.isEmpty(basket)}">
+        <table style="width:100%; border-collapse: collapse; margin-top: 20px;">
+            <thead>
+                <tr>
+                    <th style="text-align:left; border-bottom:1px solid #ccc; padding:8px;">Product</th>
+                    <th style="text-align:right; border-bottom:1px solid #ccc; padding:8px;">Quantity</th>
+                    <th style="text-align:right; border-bottom:1px solid #ccc; padding:8px;">Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- item is a Basket object -->
+                <tr th:each="item : ${basket}">
+                    <td style="padding:8px;">
+                        <span th:text="${item.product.name}">Book name</span>
+                    </td>
+                    <td style="padding:8px; text-align:right;">
+                        <span th:text="${item.quantity}">1</span>
+                    </td>
+                    <td style="padding:8px; text-align:right;">
+                        $<span th:text="${item.product.price}">0.00</span>
+                    </td>
+                    <td style="padding:8px; text-align:center;">
+                        <form th:action="@{'/basket/remove/' + ${item.product.id}}" method="post">
+                            <button type="submit">Remove</button>
+                        </form>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div style="margin-top: 20px; text-align:right;">
+            <p>
+                <strong>Total: $<span th:text="${total}"></strong>
+
+            </p>
+
+            <a th:href="@{/checkout}">
+                <button type="button">Go to Checkout</button>
+            </a>
+        </div>
+    </div>
+</main>
     </main>
 
     <footer>

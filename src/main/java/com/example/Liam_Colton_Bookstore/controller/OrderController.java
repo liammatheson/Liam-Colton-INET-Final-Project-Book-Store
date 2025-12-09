@@ -1,21 +1,21 @@
 package com.example.Liam_Colton_Bookstore.controller;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+
 import com.example.Liam_Colton_Bookstore.model.Basket;
 import com.example.Liam_Colton_Bookstore.model.Order;
 import com.example.Liam_Colton_Bookstore.model.Product;
 import com.example.Liam_Colton_Bookstore.model.User;
 import com.example.Liam_Colton_Bookstore.repository.OrderRepo;
 import com.example.Liam_Colton_Bookstore.repository.ProductRepo;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
-
-import jakarta.servlet.http.HttpSession;
-
-import java.util.ArrayList;
-import java.util.List;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -33,6 +33,11 @@ public class OrderController {
         List<Basket> basket = (List<Basket>) session.getAttribute("basket");
         if (basket == null) basket = new ArrayList<>();
         model.addAttribute("basket", basket);
+
+        double total = basket.stream().mapToDouble(Basket::getTotalPrice).sum();
+        String formattedTotal = String.format("%.2f", total);
+        model.addAttribute("total", total);
+
         return "basket";
     }
 
