@@ -43,6 +43,10 @@
 
 ![erd](/erd.png)
 
+# Architecture Diagram
+
+![architecture diagram](diagram2.png)
+
 ---
 
 ## Team Roles
