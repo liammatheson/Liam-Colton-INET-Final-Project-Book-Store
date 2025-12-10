@@ -29,10 +29,16 @@
 ## Screenshots
 
 
-![Screenshot 1](docs/screenshotv1.png)
+![Screenshot 1](docs/a.png)
 
 
-![Screenshot 2](docs/screenshotv2.png)
+![Screenshot 2](docs/b.png)
+
+
+![Screenshot 1](docs/c.png)
+
+
+![Screenshot 2](docs/d.png)
 
 ---
 
