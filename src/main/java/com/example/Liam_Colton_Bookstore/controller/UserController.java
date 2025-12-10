@@ -1,5 +1,7 @@
 package com.example.Liam_Colton_Bookstore.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -10,7 +12,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.example.Liam_Colton_Bookstore.model.Order;
 import com.example.Liam_Colton_Bookstore.model.User;
+import com.example.Liam_Colton_Bookstore.repository.OrderRepo;
 import com.example.Liam_Colton_Bookstore.repository.UserRepo;
 
 import jakarta.servlet.http.HttpSession;
@@ -25,8 +29,8 @@ public class UserController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
-
-
+    @Autowired
+    private OrderRepo orderRepo;
 
     @GetMapping("/register")
     public String showRegisterForm(Model model) {
@@ -67,9 +71,17 @@ public class UserController {
         if (userDetails == null) {
             return "redirect:/login";
         }
-        // look up your User entity from the database
-        User user = userRepo.findByEmail(userDetails.getUsername()).orElse(null);
+
+        // Look up your User entity
+        User user = userRepo.findByEmail(userDetails.getUsername())
+                            .orElseThrow(() -> new RuntimeException("User not found"));
+
+        // Get orders for the user
+        List<Order> orders = orderRepo.findByUserId(user.getId());
+
         model.addAttribute("user", user);
+        model.addAttribute("orders", orders);
+
         return "profile";
     }
 

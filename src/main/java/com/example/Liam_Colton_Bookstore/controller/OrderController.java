@@ -107,17 +107,22 @@ public class OrderController {
 
     //Convert basket
     List<Product> products = new ArrayList<>();
+    List<Integer> quantities = new ArrayList<>();
     double total = 0;
     for (Basket item : basket) {
         products.add(item.getProduct());
+        quantities.add(item.getQuantity());
         total += item.getTotalPrice();
     }
+
+
     //Create order
-    Order order = new Order(user, products, total);
+    Order order = new Order(user, products, quantities, total);
     orderRepo.save(order);
 
     //Empty basket
     session.removeAttribute("basket");
     return "order-confirmation";
     }
+
 }

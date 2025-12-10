@@ -69,6 +69,22 @@
             <p><strong>Name: </strong><span th:text="${user.name}">User Name</span></p>
             <p><strong>Email:</strong> <span th:text="${user.email}">email@example.com</span></p>
         </div>
+
+<div class="login-container">
+    <h2>Your Orders</h2>
+    <div th:each="order : ${orders}">
+        <p>Order ID: <span th:text="${order.id}"></span></p>
+        <p>Total: $<span th:text="${order.total}"></span></p>
+        <p>Products:</p>
+        <ul>
+            <li th:each="product, iterStat : ${order.products}">
+                <span th:text="${product.name}"></span> - Quantity: 
+                <span th:text="${order.quantities[iterStat.index]}"></span>
+            </li>
+        </ul>
+        <hr/>
+    </div>
+</div>
     </main>
 
     <footer>
