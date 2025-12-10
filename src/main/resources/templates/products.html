@@ -39,7 +39,7 @@
             <li th:if="${#lists.isEmpty(cartItems)}">Your cart is empty</li>
         </ul>
         
-        <p><strong>Total:</strong>$<span th:text="${total}">0.00</span></p>
+        <p><strong>Total:</strong>$<span th:text="${cartTotal}">0.00</span></p>
         
         <button id="checkout-btn" th:onclick="'window.location.href=\'/checkout\''">Checkout</button>
     </div>
