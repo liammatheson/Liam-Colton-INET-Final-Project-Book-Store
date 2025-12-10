@@ -4,6 +4,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,6 +19,7 @@ import com.example.Liam_Colton_Bookstore.model.Product;
 import com.example.Liam_Colton_Bookstore.model.User;
 import com.example.Liam_Colton_Bookstore.repository.OrderRepo;
 import com.example.Liam_Colton_Bookstore.repository.ProductRepo;
+import com.example.Liam_Colton_Bookstore.repository.UserRepo;
 
 import jakarta.servlet.http.HttpSession;
 
@@ -26,6 +30,9 @@ public class OrderController {
     private ProductRepo productRepo;
 
     @Autowired
+    private UserRepo userRepo;
+
+    @Autowired
     private OrderRepo orderRepo;
 
     @GetMapping("/basket")
@@ -34,7 +41,7 @@ public class OrderController {
         if (basket == null) basket = new ArrayList<>();
         model.addAttribute("basket", basket);
 
-        double total = basket.stream().mapToDouble(Basket::getTotalPrice).sum();
+        double total = basket.stream().mapToDouble(Basket::getTotalPrice).sum(); //show the total price of the basket as a double
         String formattedTotal = String.format("%.2f", total);
         model.addAttribute("total", total);
 
@@ -85,22 +92,32 @@ public class OrderController {
 
     @PostMapping("/checkout/complete")
     public String completeCheckout(HttpSession session) {
-        List<Basket> basket = (List<Basket>) session.getAttribute("basket");
-        if (basket != null && !basket.isEmpty()) {
-            // TODO: fetch logged-in user
-            User user = new User(); // placeholder
 
-            List<Product> products = new ArrayList<>();
-            double total = 0;
-            for (Basket item : basket) {
-                products.add(item.getProduct());
-                total += item.getTotalPrice();
-            }
+    List<Basket> basket = (List<Basket>) session.getAttribute("basket");
+    if (basket == null || basket.isEmpty()) {
+        return "redirect:/basket";
+    }
+    //Get logged-in user
+    Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+    UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+    String username = userDetails.getUsername();
 
-            Order order = new Order(user, products, total);
-            orderRepo.save(order);
-            session.removeAttribute("basket");
-        }
-        return "order-confirmation"; // create this template
+    User user = userRepo.findByEmail(username)
+                        .orElseThrow(() -> new RuntimeException("User not found"));
+
+    //Convert basket
+    List<Product> products = new ArrayList<>();
+    double total = 0;
+    for (Basket item : basket) {
+        products.add(item.getProduct());
+        total += item.getTotalPrice();
+    }
+    //Create order
+    Order order = new Order(user, products, total);
+    orderRepo.save(order);
+
+    //Empty basket
+    session.removeAttribute("basket");
+    return "order-confirmation";
     }
 }

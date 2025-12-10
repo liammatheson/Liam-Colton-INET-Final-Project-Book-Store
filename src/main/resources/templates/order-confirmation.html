@@ -3,7 +3,7 @@
       xmlns:sec="https://www.thymeleaf.org/thymeleaf-extras-springsecurity6">
 <head>
     <meta charset="UTF-8">
-    <title>Checkout</title>
+    <title>Profile</title>
     <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
@@ -62,35 +62,15 @@
             });
         });
     </script>
+<main>
+    <h1>Order Confirmation</h1>
+    <!-- page-specific content -->
+<body>
 
-    <main>
-        <h1>Checkout</h1>
-        <!-- page-specific content -->
-    <table>
-        <tr>
-            <th>Product</th>
-            <th>Quantity</th>
-            <th>Price</th>
-        </tr>
-    <tr th:each="item : ${basket}">
-        <td th:text="${item.product.name}">Book name</td>
-        <td th:text="${item.quantity}">1</td>
-        <td th:text="${item.product.price}">$0.00</td>
-    </tr>
-    </table>
-
-    <p><strong>Total:</strong> $<span th:text="${total}">0.00</span></p>
-
-<form th:action="@{/checkout/complete}" method="post">
-    <button type="submit">Confirm Purchase</button>
-</form>
+<h1>Thank you for your order!</h1>
+<p>Your order has been placed successfully.</p>
+<a th:href="@{/products}">Back to Products</a>
 
 </body>
 </main>
-</html>
-
-    <footer>
-        <p>&copy; 2025 Bookstore</p>
-    </footer>
-</body>
 </html>
