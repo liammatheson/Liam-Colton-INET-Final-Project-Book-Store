@@ -11,7 +11,7 @@ import com.example.Liam_Colton_Bookstore.model.Basket;
 import jakarta.servlet.http.HttpSession;
 
 @ControllerAdvice
-public class BasketHeader {
+public class BasketController {
 
    @ModelAttribute("cartItems")
     public List<Basket> populateBasket(HttpSession session) {
