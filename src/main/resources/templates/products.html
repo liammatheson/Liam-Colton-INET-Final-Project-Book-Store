@@ -34,8 +34,14 @@
                 <span th:text="${item.product.name}">Product Name</span> -
                 <span th:text="${item.quantity}">1</span> ×
                 <span th:text="${item.product.price}">19.99</span> $
-            </li>
 
+                <form th:action="@{/basket/remove/{id}(id=${item.product.id})}"
+                method="post"
+                style="display:inline;">
+                <button type="submit">✕</button>
+                </form>
+            </li>
+            
             <li th:if="${#lists.isEmpty(cartItems)}">Your cart is empty</li>
         </ul>
         

@@ -28,17 +28,23 @@
         Basket <span id="cart-count" th:text="${cartCount}">0</span>
     </button>
 
-    <div id="cart-panel" class="cart-panel" style="display:none;">
+   <div id="cart-panel" class="cart-panel" style="display:none;">
         <ul id="cart-items">
             <li th:each="item : ${cartItems}">
                 <span th:text="${item.product.name}">Product Name</span> -
                 <span th:text="${item.quantity}">1</span> ×
                 <span th:text="${item.product.price}">19.99</span> $
+
+                <form th:action="@{/basket/remove/{id}(id=${item.product.id})}"
+                method="post"
+                style="display:inline;">
+                <button type="submit">✕</button>
+                </form>
             </li>
 
             <li th:if="${#lists.isEmpty(cartItems)}">Your cart is empty</li>
         </ul>
-        
+
         <p><strong>Total:</strong>$<span th:text="${cartTotal}">0.00</span></p>
 
         <button id="checkout-btn" th:onclick="'window.location.href=\'/checkout\''">Checkout</button>
